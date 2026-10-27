@@ -1,0 +1,19 @@
+{
+  "name": "posture-pal-desktop",
+  "productName": "Posture Pal",
+  "version": "1.0.0",
+  "description": "Webcam posture coach with a plant mascot — desktop build",
+  "main": "main.js",
+  "author": "Posture Pal",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "smoke": "electron . --smoke",
+    "package": "electron-packager . PosturePal --platform=win32 --arch=x64 --out=dist --overwrite --icon=assets/icon.ico --ignore=\"^/dist$\" --ignore=\"^/node_modules/.cache$\"",
+    "sync-web": "node sync-web.js"
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.3.6",
+    "electron": "^33.0.0"
+  }
+}

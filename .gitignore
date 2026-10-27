@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+desktop/node_modules/
+
+# Agent & internal workspace metadata
+.agent/
+.hermes/
+
+# Archives (GitHub Releases hosts the downloadable zips)
+*.zip
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

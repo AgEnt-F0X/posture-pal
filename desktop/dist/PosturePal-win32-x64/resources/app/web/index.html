@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d0c11">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 28 V13 C16 9 10 7 6 8 C6 14 11 16 16 16 C21 16 26 14 26 8 C22 7 16 9 16 13' fill='%23e6935c' stroke='%23382419' stroke-width='1.5'/%3E%3C/svg%3E">
+  <title>Posture Pal</title>
+  <link rel="preload" as="image" href="assets/scene-dawn.webp">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ============ SCENE BACKGROUND ============ -->
+  <div id="scene-bg" class="scene-bg" data-stage="1" data-posture="good" data-screen="welcome" aria-hidden="true">
+    <div id="scene-stage" class="scene-stage">
+      <img id="scene-layer-dawn" class="scene-layer dawn" src="assets/scene-dawn.webp" alt="" draggable="false">
+      <img id="scene-layer-day" class="scene-layer day" alt="" draggable="false">
+      <img id="scene-layer-golden" class="scene-layer golden" alt="" draggable="false">
+
+      <!-- Plant anchored to the windowsill -->
+      <div id="scene-plant" class="scene-plant"></div>
+
+      <!-- Dust motes floating gently in the room -->
+      <div id="scene-dust" class="scene-dust">
+        <span class="mote m-1"></span>
+        <span class="mote m-2"></span>
+        <span class="mote m-3"></span>
+        <span class="mote m-4"></span>
+        <span class="mote m-5"></span>
+        <span class="mote m-6"></span>
+        <span class="mote m-7"></span>
+        <span class="mote m-8"></span>
+        <span class="mote m-9"></span>
+        <span class="mote m-10"></span>
+        <span class="mote m-11"></span>
+        <span class="mote m-12"></span>
+        <span class="mote m-13"></span>
+        <span class="mote m-14"></span>
+      </div>
+    </div>
+    <div class="scene-violation-overlay" aria-hidden="true"></div>
+    <div class="scene-vignette" aria-hidden="true"></div>
+    <div class="scene-scrim-welcome" aria-hidden="true"></div>
+  </div>
+
+  <div class="tint tint-warm" aria-hidden="true"></div>
+  <div class="tint tint-cool" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 21 V11" stroke="#e6935c" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 13 C 8.5 12.5, 6.5 10.5, 6 7.5 C 9.5 8, 11.5 10, 12 13 Z" fill="#4ade80"/>
+        <path d="M12 11 C 15.5 10.5, 17.5 8.5, 18 5.5 C 14.5 6, 12.5 8, 12 11 Z" fill="#2dd4bf"/>
+      </svg>
+      <span>Posture Pal</span>
+    </div>
+    <div class="topbar-actions">
+      <label class="toggle" id="demo-toggle-wrap" title="Run without a camera: a simulated person cycles through each posture problem">
+        <input type="checkbox" id="demo-toggle">
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        <span class="toggle-label">Demo</span>
+      </label>
+      <button class="icon-btn" id="settings-btn" title="Settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.2"/>
+          <path d="M19.4 13.5a7.6 7.6 0 0 0 0-3l2-1.5-2-3.4-2.3.9a7.6 7.6 0 0 0-2.6-1.5L14 2.5h-4L9.5 5a7.6 7.6 0 0 0-2.6 1.5l-2.3-.9-2 3.4 2 1.5a7.6 7.6 0 0 0 0 3l-2 1.5 2 3.4 2.3-.9a7.6 7.6 0 0 0 2.6 1.5l.5 2.5h4l.5-2.5a7.6 7.6 0 0 0 2.6-1.5l2.3.9 2-3.4Z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="app">
+
+    <!-- ============ WELCOME ============ -->
+    <section id="screen-welcome" class="screen active">
+      <div class="hero-wrap">
+        <div class="hero-copy">
+          <div class="headline-row rise rise-2">
+            <h1>Sit tall.<br>Grow tall.</h1>
+            <div class="micro-demo" aria-hidden="true" title="Posture demonstration">
+              <svg class="stick-fig-svg" viewBox="0 0 54 44" width="54" height="44">
+                <line x1="6" y1="38" x2="20" y2="38" stroke="var(--text-dim)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="8" y1="38" x2="14" y2="28" stroke="var(--text-dim)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="28" y1="38" x2="44" y2="38" stroke="rgba(236,233,244,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="42" y1="38" x2="42" y2="20" stroke="rgba(236,233,244,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+                <g class="fig-body">
+                  <path d="M 36 38 L 36 28 L 30 28" fill="none" stroke="var(--text-dim)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="fig-spine" d="M 36 28 C 36 22, 35 18, 33 13" fill="none" stroke="var(--warm)" stroke-width="2.2" stroke-linecap="round"/>
+                  <circle class="fig-head" cx="33" cy="8" r="4.5" fill="var(--warm)"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <p class="lede rise rise-3">A plant on your screen grows for every minute you sit well,
+            and wilts when you slump. Your webcam watches, your laptop thinks,
+            nothing is uploaded.</p>
+          <div class="steps-flow rise rise-4" aria-label="How it works">
+            <span class="step-item">Pick a camera</span>
+            <span class="step-divider" aria-hidden="true"></span>
+            <span class="step-item">Sit tall, then slouch</span>
+            <span class="step-divider" aria-hidden="true"></span>
+            <span class="step-item">We nudge you back</span>
+          </div>
+          <div class="cta-row rise rise-4">
+            <button class="btn primary cta" id="start-btn">Start session</button>
+            <div class="camera-inline" id="welcome-camera-row">
+              <span aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+                  <circle cx="12" cy="14" r="3.5"/>
+                </svg>
+              </span>
+              <label for="welcome-camera" class="visually-hidden">Camera</label>
+              <select id="welcome-camera" class="camera-select" aria-label="Camera to use"></select>
+              <button class="icon-btn" id="refresh-cams-btn" title="Refresh camera list" aria-label="Refresh camera list">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 11a8 8 0 1 0-1.5 5.5"/><path d="M20 5v6h-6"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <p class="coach-status hidden" id="coach-status"></p>
+          <p class="hint" id="start-hint">You'll be asked for camera permission. That is all it uses.</p>
+          <p class="error hidden" id="start-error" role="alert"></p>
+        </div>
+
+        <div class="hero-art rise rise-3">
+          <div id="welcome-plant" class="plant-holder"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CALIBRATE ============ -->
+    <section id="screen-calibrate" class="screen">
+      <div class="calibrate-wrap">
+        <div class="calib-head">
+          <span class="calib-step" id="calib-step">Step 1 of 2</span>
+        </div>
+        <h2 class="calib-title" id="calib-title">Sit tall and face the screen</h2>
+        <p class="calib-sub" id="calib-sub">We learn what good posture looks like on you. Three seconds.</p>
+        <div class="camera-frame">
+          <video id="calib-video" autoplay playsinline muted></video>
+          <div class="calib-overlay">
+            <div class="calib-count tabular" id="calib-count">3</div>
+          </div>
+        </div>
+        <div class="calib-progress" aria-hidden="true"><i id="calib-progress-fill"></i></div>
+      </div>
+    </section>
+
+    <!-- ============ MONITOR ============ -->
+    <section id="screen-monitor" class="screen">
+      <div class="monitor-grid">
+
+        <div class="camera-panel">
+          <div class="camera-frame">
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            <div class="status-pill" id="status-pill" aria-live="polite">
+              <span id="status-icon" aria-hidden="true"></span>
+              <span class="label" id="status-label">Checking</span>
+            </div>
+            <div class="align-meter" aria-hidden="true"><div class="align-fill" id="align-fill"></div></div>
+            <div class="demo-chip hidden" id="demo-chip">DEMO</div>
+          </div>
+          <div class="camera-meta">
+            <span id="session-clock" class="session-clock tabular">00:00</span>
+            <div class="camera-select-wrap hidden" id="camera-select-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+                <circle cx="12" cy="14" r="3.5"/>
+              </svg>
+              <select id="camera-select" class="camera-select" aria-label="Camera"></select>
+            </div>
+            <button class="btn ghost" id="recalibrate-btn">Recalibrate</button>
+            <button class="btn text" id="end-btn">End session</button>
+          </div>
+        </div>
+
+        <aside class="plant-panel">
+          <div class="shelf-ledge">
+            <div class="plant-stage-card">
+              <div id="plant" class="plant-holder"></div>
+              <div class="stage-info">
+                <p class="plant-caption" id="plant-caption"></p>
+                <p class="stage-hint" id="stage-hint"></p>
+              </div>
+              <div class="stage-bar" aria-hidden="true"><div class="stage-fill" id="stage-fill"></div></div>
+            </div>
+
+            <div class="stat-row">
+              <div class="stat">
+                <div class="stat-value" id="stat-score">0%</div>
+                <div class="stat-label">Posture score</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value small tabular" id="stat-good">0:00</div>
+                <div class="stat-label">Good today</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value small tabular" id="stat-streak">0</div>
+                <div class="stat-label">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 2c1 4-4 6-4 10a4 4 0 0 0 8 0c0-1.5-.5-3-1.5-4.5C13 9.5 12.5 11 11.5 11 12.5 8 12.5 4.5 12 2Z"/>
+                  </svg>
+                  Day streak
+                </div>
+              </div>
+            </div>
+            <div class="chart" id="chart"></div>
+            <div class="badges" id="badges"></div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ============ SUMMARY ============ -->
+    <section id="screen-summary" class="screen">
+      <div class="summary-wrap">
+        <h1 class="summary-title" id="summary-title">Session complete</h1>
+
+        <div class="summary-main">
+          <div class="sum-hero stat">
+            <div class="stat-value" id="sum-score">0%</div>
+            <div class="stat-label">Posture score</div>
+          </div>
+          <div id="summary-plant" class="summary-plant plant-holder"></div>
+          <div class="summary-side">
+            <div class="stat">
+              <div class="stat-value small tabular" id="sum-time">0:00</div>
+              <div class="stat-label">Monitored</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value small tabular" id="sum-good">0:00</div>
+              <div class="stat-label">Sitting tall</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value small tabular" id="sum-streak">0</div>
+              <div class="stat-label">Day streak</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-note hidden" id="ai-coach">
+          <div class="coach-note-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2 19 19M19 5l-2.8 2.8M7.8 16.2 5 19"/>
+            </svg>
+            Coach
+          </div>
+          <p id="ai-coach-text"></p>
+        </div>
+
+        <p class="summary-message" id="summary-message"></p>
+        <div class="badges" id="summary-badges"></div>
+        <div class="btn-row" style="margin-top: var(--sp-6);">
+          <button class="btn primary" id="again-btn">Start another session</button>
+          <button class="btn ghost" id="home-btn">Home</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- nudge banner -->
+  <div id="nudge" class="nudge hidden" aria-live="assertive">
+    <span class="nudge-icon" aria-hidden="true"></span>
+    <span class="nudge-text" id="nudge-text"></span>
+    <span class="nudge-bar" aria-hidden="true"></span>
+  </div>
+
+  <!-- stacked toasts -->
+  <div id="toast" class="toasts" aria-live="polite"></div>
+
+  <!-- settings drawer -->
+  <div id="settings-modal" class="modal hidden">
+    <aside class="drawer" role="dialog" aria-label="Settings">
+      <div class="drawer-head">
+        <h2>Settings</h2>
+        <button class="icon-btn" id="close-settings-btn" aria-label="Close settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-section">Session</div>
+      <div class="field">
+        <label for="set-sensitivity">Slouch sensitivity</label>
+        <div class="field-row">
+          <input type="range" id="set-sensitivity" min="5" max="25" step="1" value="12">
+          <output for="set-sensitivity" id="sensitivity-val">12%</output>
+        </div>
+      </div>
+      <div class="field">
+        <label for="set-goal">Daily goal, minutes</label>
+        <input type="number" id="set-goal" min="5" max="120" step="5" value="25">
+      </div>
+
+      <div class="drawer-section">Alerts</div>
+      <label class="check"><input type="checkbox" id="set-sound" checked><span>Sound nudge</span></label>
+      <label class="check"><input type="checkbox" id="set-notify"><span>Desktop notifications</span></label>
+
+      <div class="drawer-section">AI coach, optional</div>
+      <div class="field">
+        <label for="set-ai-key">Gemini API key</label>
+        <input type="password" id="set-ai-key" placeholder="Paste key" autocomplete="off" spellcheck="false">
+      </div>
+      <label class="check"><input type="checkbox" id="set-ai"><span>Coach report after each session</span></label>
+      <label class="check"><input type="checkbox" id="set-ai-tips"><span>Live tip every 5 minutes</span></label>
+      <p class="hint">The coach writes on the summary screen when you end a session of a minute or
+        more. Free key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer">aistudio.google.com</a>.
+        The key stays in this browser. Posture detection itself is always on-device.</p>
+
+      <div class="drawer-foot">
+        <button class="btn text" id="reset-stats-btn">Reset all stats</button>
+        <button class="btn primary" id="close-settings-btn">Done</button>
+      </div>
+      <p class="hint">Everything is stored only in this browser.</p>
+    </aside>
+  </div>
+
+  <footer class="footer">Runs entirely on this device. Your camera feed never leaves it.</footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
